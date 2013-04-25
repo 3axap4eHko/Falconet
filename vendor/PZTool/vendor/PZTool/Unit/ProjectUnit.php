@@ -34,6 +34,6 @@ class ProjectUnit extends AbstractUnit
         }
         mkdir($this->projectDirectory, 0755, true);
         chdir($this->projectDirectory);
-        $this->createDirectories($this->directories);
+//        $this->createDirectories($this->directories);
     }
 }

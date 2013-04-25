@@ -12,7 +12,6 @@ namespace PZTool;
 
 use Phalcon\CLI\Console;
 use Phalcon\DI\FactoryDefault as DI;
-use Phalcon\Mvc\Dispatcher\Exception;
 use Phalcon\Version;
 
 class Application
@@ -54,7 +53,7 @@ class Application
 
     }
 
-    public static function exceptionHandler(Exception $e)
+    public static function exceptionHandler(\Exception $e)
     {
         echo 'Fatal Error: ' . $e->getMessage() . PHP_EOL;
     }
