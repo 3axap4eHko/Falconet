@@ -12,6 +12,7 @@ namespace PZTool\Unit;
 class ProjectUnit extends AbstractUnit
 {
     const DIR_MODULES = 'module';
+    const DIR_PUBLIC  = 'public';
     const DIR_ASSETS  = 'public/assets';
     const DIR_VENDOR  = 'vendor';
     const DIR_TEST    = 'test';
@@ -34,6 +35,6 @@ class ProjectUnit extends AbstractUnit
         }
         mkdir($this->projectDirectory, 0755, true);
         chdir($this->projectDirectory);
-//        $this->createDirectories($this->directories);
+        $this->createDirectories($this->directories);
     }
 }

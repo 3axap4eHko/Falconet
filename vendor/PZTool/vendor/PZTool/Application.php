@@ -25,19 +25,24 @@ class Application
 
     public static function init($arguments)
     {
-        set_error_handler('PZTool\Application::errorHandler');
+        set_error_handler('PZTool\Application::errorHandler', E_ALL);
         set_exception_handler('PZTool\Application::exceptionHandler');
+
+        if(  (float)PHP_VERSION < 5.4 ) {
+            throw new \Exception('Require PHP version 5.4 or greater');
+        }
+
         if( Version::getId() - self::VERSION * 1000000 > 10000 ) {
             throw new \Exception('Require Phalcon version ' . self::VERSION);
         }
         $application = new Console();
         $application->setDI($di = new DI());
-        $application->registerModules(array(
-                                          'PZTool' => array(
+        $application->registerModules([
+                                          'PZTool' => [
                                               'className' => 'PZTool\Module',
                                               'path'      => __DIR__ . '/Module.php'
-                                          ),
-                                      ));
+                                          ],
+                                      ]);
         $di->set('router', $router = new Router());
         $router->setDefaultModule('PZTool');
         $router->setDefaultTask('help');
@@ -48,9 +53,9 @@ class Application
         $application->handle($arguments);
     }
 
-    public static function errorHandler()
+    public static function errorHandler($code, $error, $file, $line)
     {
-
+        echo 'Error (' . $code . ') ' . $error . ' in file ' . $file . ':' . $line . PHP_EOL;
     }
 
     public static function exceptionHandler(\Exception $e)

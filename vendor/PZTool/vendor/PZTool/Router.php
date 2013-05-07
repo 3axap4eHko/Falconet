@@ -16,7 +16,7 @@ class Router extends \Phalcon\CLI\Router
         return __NAMESPACE__;
     }
 
-    public function handle($arguments)
+    public function handle($arguments = null)
     {
         array_shift($arguments);
         $this->_task = array_shift($arguments);

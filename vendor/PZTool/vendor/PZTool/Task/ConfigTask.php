@@ -25,4 +25,12 @@ class ConfigTask extends Task
         $filename = $this->getParamAlt('config', 0);
         $this->unit->create($filename);
     }
+
+    public function setAction()
+    {
+        $filename = $this->getParamAlt('config', 0);
+        $keyPath =  $this->getParamAlt('keys', 1);
+        $value =  $this->getParamAlt('value', 2);
+        $this->unit->set($filename, $keyPath, $value);
+    }
 }

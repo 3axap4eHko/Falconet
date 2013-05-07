@@ -107,6 +107,7 @@ class ValueGenerator extends AbstractGenerator
         );
         $constants = array_merge($constants, array_keys(get_defined_constants()), $this->constants->getArrayCopy());
         $this->constants->exchangeArray($constants);
+        return $this;
     }
 
     /**
@@ -349,7 +350,7 @@ class ValueGenerator extends AbstractGenerator
                 $output .= $value;
                 break;
             case self::TYPE_ARRAY:
-                $output .= 'array(';
+                $output .= '[';
                 $curArrayMultiblock = false;
                 if (count($value) > 1) {
                     $curArrayMultiblock = true;
@@ -377,7 +378,7 @@ class ValueGenerator extends AbstractGenerator
                 if ($curArrayMultiblock == true && $this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
                     $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
                 }
-                $output .= ')';
+                $output .= ']';
                 break;
             case self::TYPE_OTHER:
             default:
